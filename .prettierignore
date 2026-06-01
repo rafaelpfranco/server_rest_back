@@ -1,0 +1,15 @@
+node_modules/
+package-lock.json
+
+cypress/reports/
+cypress/screenshots/
+cypress/videos/
+cypress/downloads/
+
+mochawesome-report/
+mochawesome.json
+mochawesome*.json
+
+coverage/
+dist/
+build/
