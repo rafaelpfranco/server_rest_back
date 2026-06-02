@@ -1,23 +1,25 @@
 # ServeRest API - Testes Automatizados com Cypress
 
-Projeto de automacao de testes de API da aplicacao **ServeRest**, desenvolvido com **Cypress** e **JavaScript**.
+Projeto de automação de testes de API da aplicação **ServeRest**, desenvolvido com **Cypress** e **JavaScript**.
 
-A suite valida os principais fluxos da API de produtos: cadastro, edicao e exclusao, sempre confirmando o resultado final por meio da consulta/listagem de produtos.
+A suíte valida os principais fluxos da API de produtos: cadastro, edição e exclusão. Ao final dos fluxos, os dados são conferidos por meio da listagem de produtos.
 
 ## Stack
 
-- Cypress
-- JavaScript
-- Dotenv
-- Mochawesome Reporter
-- ESLint
-- Prettier
-- Husky
-- Commitlint
+* Cypress
+* JavaScript
+* Dotenv
+* Mochawesome Reporter
+* ESLint
+* Prettier
+* Husky
+* Commitlint
+* GitHub Actions
+* Cypress Cloud
 
 ## Objetivo
 
-Validar os principais fluxos da API de produtos do ServeRest, garantindo que as operacoes de cadastro, edicao e exclusao funcionem corretamente e reflitam os dados esperados na consulta de produtos.
+Validar os principais fluxos da API de produtos do ServeRest, garantindo que as operações de cadastro, edição e exclusão funcionem corretamente e reflitam os dados esperados na consulta de produtos.
 
 ## Estrutura do Projeto
 
@@ -50,30 +52,30 @@ features/
   produtos.md
 ```
 
-## Decisoes Tecnicas
+## Arquitetura
 
-O projeto utiliza Cypress com JavaScript para testes automatizados de API.
+O projeto foi organizado em camadas simples:
 
-A arquitetura foi organizada em:
+* `clients`: centralizam as chamadas HTTP com `cy.request`;
+* `fixtures`: concentram as massas dinâmicas dos testes;
+* `assertions`: concentram validações reutilizáveis;
+* `specs`: descrevem os cenários de teste;
+* `commands`: concentram comandos globais, como autenticação via API.
 
-- `clients`: centralizam as chamadas HTTP com `cy.request`;
-- `fixtures`: concentram as massas dinamicas dos testes;
-- `assertions`: concentram validacoes reutilizaveis;
-- `specs`: descrevem os cenarios de teste em alto nivel;
-- `commands`: concentram comandos globais, como autenticacao via API.
+Os usuários utilizados nos testes são criados dinamicamente durante a execução, evitando dependência de massa fixa em ambiente público.
 
-## Pre-requisitos
+## Pré-requisitos
 
-- Node.js 18 ou superior
-- npm
+* Node.js 18 ou superior
+* npm
 
-## Instalacao
+## Instalação
 
 ```bash
 npm install
 ```
 
-## Configuracao do Ambiente
+## Configuração do Ambiente
 
 Crie o arquivo `.env` com base no `.env.example`.
 
@@ -81,9 +83,7 @@ Crie o arquivo `.env` com base no `.env.example`.
 BASE_URL=https://serverest.dev
 ```
 
-Os usuarios utilizados nos testes sao criados dinamicamente durante a execucao, evitando dependencia de massa fixa em ambiente publico.
-
-## Execucao dos Testes
+## Execução dos Testes
 
 Abrir Cypress em modo interativo:
 
@@ -103,51 +103,92 @@ Executar apenas os testes de API:
 npm run cy:run:api
 ```
 
-Executar com relatorio:
+Executar com relatório local:
 
 ```bash
 npm run cy:run:report
 ```
 
-## Plano de Teste
+## Cenários Automatizados
 
-O plano de teste contempla os principais fluxos da API de produtos.
-
-A documentacao dos cenarios, com passo a passo e resultado esperado, esta disponivel em:
-
-```txt
-features/produtos.md
-```
-
-## Cenarios Automatizados
-
-Os cenarios automatizados estao implementados na spec:
+Os cenários automatizados estão implementados na spec:
 
 ```txt
 cypress/e2e/api/produtos.cy.js
 ```
 
-Cenarios validados:
+Cenários validados:
 
-- Validar cadastro de produto com sucesso;
-- Validar edicao de produto com sucesso;
-- Validar exclusao de produto com sucesso.
+* Validar cadastro de produto com sucesso;
+* Validar edição de produto com sucesso;
+* Validar exclusão de produto com sucesso.
 
-Cada cenario valida o fluxo principal e confirma o resultado final por meio de consulta/listagem de produtos.
+A documentação dos cenários, com passo a passo e resultado esperado, está disponível em:
 
-## Relatorio
+```txt
+features/produtos.md
+```
+
+## CI/CD
+
+O projeto possui pipeline no GitHub Actions para execução dos testes de API.
+
+A pipeline é executada manualmente pela aba **Actions** do GitHub e realiza:
+
+* instalação das dependências;
+* validação de lint;
+* validação de formatação;
+* execução dos testes de API;
+* publicação dos artefatos de execução;
+* envio dos resultados para o Cypress Cloud;
+* disparo da pipeline do projeto frontend.
+
+A execução do frontend é disparada independentemente do resultado da pipeline de API.
+
+## Relatórios
+
+### Cypress Cloud
+
+O relatório das execuções do backend pode ser acessado em:
+
+```txt
+https://cloud.cypress.io/projects/q7vu1q/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&tagsMatch=ANY&timeRange=%7B%22startDate%22%3A%222025-06-02%22%2C%22endDate%22%3A%222026-06-02%22%2C%22id%22%3A%22LAST_12_MONTHS%22%7D
+```
+O relatório das execuções do frontend pode ser acessado em:
+
+```txt
+https://cloud.cypress.io/projects/66nkyu/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&tagsMatch=ANY&timeRange=%7B%22startDate%22%3A%222025-06-02%22%2C%22endDate%22%3A%222026-06-02%22%2C%22id%22%3A%22LAST_12_MONTHS%22%7D
+```
+
+### Relatório local
 
 O projeto utiliza `cypress-mochawesome-reporter`.
 
-Os relatorios sao gerados em:
+Os relatórios locais são gerados em:
 
 ```txt
 cypress/reports/
 ```
 
-Os arquivos de relatorio, videos, screenshots e downloads nao sao versionados.
+Os arquivos de relatório, vídeos, screenshots e downloads não são versionados.
 
-## Qualidade de Codigo
+## Secrets da Pipeline
+
+Secrets necessários no repositório:
+
+```txt
+BASE_URL
+CYPRESS_RECORD_KEY
+FRONT_REPO_PAT
+```
+
+Observações:
+
+* `BASE_URL`: URL base da API ServeRest;
+* `CYPRESS_RECORD_KEY`: chave de gravação do Cypress Cloud;
+* `FRONT_REPO_PAT`: token usado para disparar a pipeline do projeto frontend.
+
+## Qualidade de Código
 
 Executar lint:
 
@@ -155,13 +196,13 @@ Executar lint:
 npm run lint
 ```
 
-Corrigir problemas automaticamente quando possivel:
+Corrigir problemas automaticamente quando possível:
 
 ```bash
 npm run lint:fix
 ```
 
-Validar formatacao:
+Validar formatação:
 
 ```bash
 npm run format:check
@@ -177,12 +218,12 @@ npm run format
 
 O projeto utiliza Husky.
 
-Validacoes configuradas:
+Validações configuradas:
 
-- `pre-commit`: executa ESLint;
-- `commit-msg`: valida o padrao Conventional Commit.
+* `pre-commit`: executa ESLint;
+* `commit-msg`: valida o padrão Conventional Commit.
 
-Exemplo de commit valido:
+Exemplo de commit válido:
 
 ```bash
 git commit -m "test: adiciona testes de api de produtos"
@@ -193,23 +234,5 @@ git commit -m "test: adiciona testes de api de produtos"
 Formato esperado:
 
 ```txt
-tipo: descricao curta
+tipo: descrição curta
 ```
-
-Exemplos:
-
-```txt
-chore: configura estrutura inicial da api
-test: adiciona testes de api de produtos
-docs: adiciona documentacao do projeto
-refactor: simplifica estrutura dos testes de api
-```
-
-Tipos mais usados:
-
-- chore
-- test
-- docs
-- refactor
-- fix
-- ci
