@@ -80,14 +80,6 @@ USER_EMAIL=seu_email
 USER_PASSWORD=sua_senha
 ```
 
-Exemplo:
-
-```env
-BASE_URL=https://serverest.dev
-USER_EMAIL=automacao_rest@teste.com.br
-USER_PASSWORD=123456
-```
-
 ## Execucao dos Testes
 
 Abrir Cypress em modo interativo:
