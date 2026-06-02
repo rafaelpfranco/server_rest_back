@@ -3,6 +3,7 @@ const { defineConfig } = require('cypress')
 require('dotenv').config()
 
 module.exports = defineConfig({
+  projectId: 'q7vu1q',
   reporter: 'cypress-mochawesome-reporter',
   env: {
     userEmail: process.env.USER_EMAIL,
