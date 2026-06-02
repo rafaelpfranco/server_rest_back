@@ -36,7 +36,7 @@ jobs:
         uses: cypress-io/github-action@v7
         with:
           install: false
-          command: npm run cy:run:api -- --record
+          command: npm run cy:run:api -- --record --group "Backend API"
 
       - name: Upload Cypress reports
         if: always()
