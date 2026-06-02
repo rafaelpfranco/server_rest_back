@@ -152,12 +152,12 @@ A execução do frontend é disparada independentemente do resultado da pipeline
 O relatório das execuções do backend pode ser acessado em:
 
 ```txt
-https://cloud.cypress.io/projects/q7vu1q/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&tagsMatch=ANY&timeRange=%7B%22startDate%22%3A%222025-06-02%22%2C%22endDate%22%3A%222026-06-02%22%2C%22id%22%3A%22LAST_12_MONTHS%22%7D
+https://cloud.cypress.io/projects/q7vu1q/runs
 ```
 O relatório das execuções do frontend pode ser acessado em:
 
 ```txt
-https://cloud.cypress.io/projects/66nkyu/runs?branches=%5B%5D&committers=%5B%5D&flaky=%5B%5D&page=1&status=%5B%5D&tags=%5B%5D&tagsMatch=ANY&timeRange=%7B%22startDate%22%3A%222025-06-02%22%2C%22endDate%22%3A%222026-06-02%22%2C%22id%22%3A%22LAST_12_MONTHS%22%7D
+https://cloud.cypress.io/projects/66nkyu/runs
 ```
 
 ### Relatório local
