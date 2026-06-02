@@ -30,6 +30,8 @@ cypress/
   fixtures/
     produtos/
       produto.js
+    usuarios/
+      usuario.js
 
   support/
     commands.js
@@ -37,11 +39,12 @@ cypress/
     config/
       environment.js
     clients/
-      AuthClient.js
       ProdutosClient.js
+      UsuariosClient.js
     assertions/
       authAssertions.js
       produtosAssertions.js
+      usuariosAssertions.js
 
 features/
   produtos.md
@@ -76,9 +79,9 @@ Crie o arquivo `.env` com base no `.env.example`.
 
 ```env
 BASE_URL=https://serverest.dev
-USER_EMAIL=seu_email
-USER_PASSWORD=sua_senha
 ```
+
+Os usuarios utilizados nos testes sao criados dinamicamente durante a execucao, evitando dependencia de massa fixa em ambiente publico.
 
 ## Execucao dos Testes
 

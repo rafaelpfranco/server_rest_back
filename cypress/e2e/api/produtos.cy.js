@@ -6,19 +6,29 @@ import {
   validarProdutoNaConsulta,
   validarProdutoNaListagem,
 } from '../../support/assertions/produtosAssertions'
+import { validarCadastroUsuarioComSucesso } from '../../support/assertions/usuariosAssertions'
 import { ProdutosClient } from '../../support/clients/ProdutosClient'
+import { UsuariosClient } from '../../support/clients/UsuariosClient'
 import {
   criarProduto,
   criarProdutoEditado,
 } from '../../fixtures/produtos/produto'
+import { criarUsuarioAdministrador } from '../../fixtures/usuarios/usuario'
 
 describe('Produtos API', () => {
   const produtosClient = new ProdutosClient()
+  const usuariosClient = new UsuariosClient()
   let token
 
   before(() => {
-    cy.loginApi().then((authorization) => {
-      token = authorization
+    const usuario = criarUsuarioAdministrador()
+
+    usuariosClient.cadastrarUsuario(usuario).then((usuarioResponse) => {
+      validarCadastroUsuarioComSucesso(usuarioResponse)
+
+      cy.loginApi(usuario).then((authorization) => {
+        token = authorization
+      })
     })
   })
 

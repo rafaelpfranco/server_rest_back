@@ -1,14 +1,12 @@
 import { validarLoginComSucesso } from './assertions/authAssertions'
-import { AuthClient } from './clients/AuthClient'
+import { UsuariosClient } from './clients/UsuariosClient'
 
-Cypress.Commands.add('loginApi', () => {
-  const authClient = new AuthClient()
+Cypress.Commands.add('loginApi', (usuario) => {
+  const usuariosClient = new UsuariosClient()
 
-  return authClient
-    .login(Cypress.env('userEmail'), Cypress.env('userPassword'))
-    .then((response) => {
-      validarLoginComSucesso(response)
+  return usuariosClient.login(usuario).then((response) => {
+    validarLoginComSucesso(response)
 
-      return response.body.authorization
-    })
+    return response.body.authorization
+  })
 })
