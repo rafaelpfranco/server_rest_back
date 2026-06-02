@@ -4,8 +4,12 @@ require('dotenv').config()
 
 module.exports = defineConfig({
   reporter: 'cypress-mochawesome-reporter',
+  env: {
+    userEmail: process.env.USER_EMAIL,
+    userPassword: process.env.USER_PASSWORD,
+  },
   e2e: {
-    baseUrl: process.env.BASE_URL,
+    baseUrl: process.env.BASE_URL || 'https://serverest.dev',
     specPattern: 'cypress/e2e/**/*.cy.js',
     supportFile: 'cypress/support/e2e.js',
     setupNodeEvents(on, config) {

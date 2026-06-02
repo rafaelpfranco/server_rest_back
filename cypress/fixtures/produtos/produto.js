@@ -3,14 +3,14 @@ const criarIdentificador = () =>
 
 export const criarProduto = () => ({
   nome: `Produto API ${criarIdentificador()}`,
-  preco: 100,
-  descricao: 'Produto criado pela automacao de API',
-  quantidade: 10,
+  preco: 470,
+  descricao: 'Mouse',
+  quantidade: 381,
 })
 
 export const criarProdutoEditado = () => ({
   nome: `Produto API Editado ${criarIdentificador()}`,
   preco: 150,
-  descricao: 'Produto editado pela automacao de API',
-  quantidade: 5,
+  descricao: 'Mouse editado',
+  quantidade: 100,
 })
